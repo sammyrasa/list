@@ -28,7 +28,7 @@ const coresStatus = {
   'Finalizado': '#32CD32',
 };
 
-export default function App() {
+export default function HomeScreen({ navigation }) {
   const renderItem = ({ item }) => (
     <View style={styles.card}>
       <Text style={styles.cliente}>{item.cliente}</Text>
