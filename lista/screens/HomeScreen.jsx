@@ -50,4 +50,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-slala
