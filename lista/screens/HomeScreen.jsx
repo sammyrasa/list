@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import {
+    StyleSheet,
+    View,
+    Text,
+    FlatList,
+    TouchableOpacity,
+    Modal,
+    TextInput,
+    Pressable,
+} from 'react-native';
 import ItemCard from '../components/ItemCard';
 
-const DATA = [
+const initialData = [
     { id: '1', title: 'Tarefa 1', description: 'Descrição da Tarefa 1' },
     { id: '2', title: 'Tarefa 2', description: 'Descrição da Tarefa 2' },
     { id: '3', title: 'Tarefa 3', description: 'Descrição da Tarefa 3' },
@@ -11,8 +20,10 @@ const DATA = [
 ];
 
 export default function HomeScreen({ navigation }) {
-
-    const [data, setData] = useState(DATA);
+    const [data, setData] = useState(initialData);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [newTitle, setNewTitle] = useState('');
+    const [newDescription, setNewDescription] = useState('');
 
     const renderItem = ({ item }) => (
         <ItemCard
@@ -23,30 +34,74 @@ export default function HomeScreen({ navigation }) {
     );
 
     const adicionarItem = () => {
+        if (!newTitle.trim()) return;
+
         const novoItem = {
             id: (data.length + 1).toString(),
-            title: `Tarefa ${data.length + 1}`,
-            description: `Descrição da Tarefa ${data.length + 1}`,
+            title: newTitle,
+            description: newDescription,
         };
 
         setData([...data, novoItem]);
+        setNewTitle('');
+        setNewDescription('');
+        setModalVisible(false);
     };
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Lista de Tarefas</Text>
 
-            <TouchableOpacity style={styles.button} onPress={adicionarItem}>
-                <Text style={styles.buttonText}>Adicionar Tarefa</Text>
+            <TouchableOpacity style={styles.button} onPress={() => setModalVisible(true)}>
+                <Text style={styles.buttonText}>+ Adicionar Tarefa</Text>
             </TouchableOpacity>
 
             <FlatList
-                data={DATA}
+                data={data}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
                 style={styles.list}
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
             />
+
+            {/* Modal */}
+            <Modal
+                visible={modalVisible}
+                transparent={true}
+                animationType="slide"
+                onRequestClose={() => setModalVisible(false)}
+            >
+                <View style={styles.modalOverlay}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.modalTitle}>Nova Tarefa</Text>
+
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Título"
+                            value={newTitle}
+                            onChangeText={setNewTitle}
+                        />
+
+                        <TextInput
+                            style={[styles.input, styles.textArea]}
+                            placeholder="Descrição"
+                            value={newDescription}
+                            onChangeText={setNewDescription}
+                            multiline
+                        />
+
+                        <View style={styles.modalButtons}>
+                            <Pressable style={styles.cancelButton} onPress={() => setModalVisible(false)}>
+                                <Text style={styles.buttonText}>Cancelar</Text>
+                            </Pressable>
+
+                            <Pressable style={styles.saveButton} onPress={adicionarItem}>
+                                <Text style={styles.buttonText}>Salvar</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 }
@@ -60,35 +115,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginBottom: 10,
         color: '#333',
         textAlign: 'center',
-    },
-    list: {
-        flex: 1,
-    },
-    card: {
-        backgroundColor: '#fff',
-        padding: 15,
-        borderRadius: 10,
-        marginBottom: 10,
-        borderWidth: 1,
-        borderColor: '#ddd',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 5,
-        elevation: 3,
-    },
-    cardTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#333',
-    },
-    cardDescription: {
-        fontSize: 16,
-        color: '#666',
-        marginTop: 5,
     },
     button: {
         backgroundColor: '#28a745',
@@ -103,16 +132,62 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+    list: {
+        flex: 1,
+    },
     separator: {
         height: 1,
         backgroundColor: '#ddd',
         marginVertical: 5,
     },
-    listHeader: {
-        fontSize: 18,
+    modalOverlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    modalContainer: {
+        width: '85%',
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        padding: 20,
+    },
+    modalTitle: {
+        fontSize: 20,
         fontWeight: 'bold',
-        color: '#333',
-        marginBottom: 10,
+        marginBottom: 15,
         textAlign: 'center',
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 8,
+        padding: 10,
+        marginBottom: 15,
+        fontSize: 16,
+    },
+    textArea: {
+        height: 80,
+        textAlignVertical: 'top',
+    },
+    modalButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    cancelButton: {
+        backgroundColor: '#dc3545',
+        padding: 12,
+        borderRadius: 8,
+        flex: 1,
+        marginRight: 10,
+        alignItems: 'center',
+    },
+    saveButton: {
+        backgroundColor: '#007bff',
+        padding: 12,
+        borderRadius: 8,
+        flex: 1,
+        marginLeft: 10,
+        alignItems: 'center',
     },
 });
