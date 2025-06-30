@@ -20,18 +20,14 @@ export default function HomeScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Lista de Itens</Text>
+            <Text style={styles.title}>Lista de Tarefas</Text>
             <FlatList
-                ListHeaderComponent={() => (
-                    <Text style={styles.listHeader}>Meus Itens</Text>
-                )}
                 data={DATA}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
                 style={styles.list}
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
             />
-
             <TouchableOpacity
                 style={[styles.button, { backgroundColor: '#28a745' }]}
                 onPress={() => navigation.navigate('Profile')}
