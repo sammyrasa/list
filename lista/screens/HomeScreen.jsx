@@ -2,11 +2,11 @@ import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native
 import ItemCard from '../components/ItemCard';
 
 const DATA = [
-    { id: '1', title: 'Item 1', description: 'Descrição do item 1' },
-    { id: '2', title: 'Item 2', description: 'Descrição do item 2' },
-    { id: '3', title: 'Item 3', description: 'Descrição do item 3' },
-    { id: '4', title: 'Item 4', description: 'Descrição do item 4' },
-    { id: '5', title: 'Item 5', description: 'Descrição do item 5' },
+    { id: '1', title: 'Tarefa 1', description: 'Descrição da Tarefa 1' },
+    { id: '2', title: 'Tarefa 2', description: 'Descrição da Tarefa 2' },
+    { id: '3', title: 'Tarefa 3', description: 'Descrição da Tarefa 3' },
+    { id: '4', title: 'Tarefa 4', description: 'Descrição da Tarefa 4' },
+    { id: '5', title: 'Tarefa 5', description: 'Descrição da Tarefa 5' },
 ];
 
 export default function HomeScreen({ navigation }) {
@@ -28,12 +28,6 @@ export default function HomeScreen({ navigation }) {
                 style={styles.list}
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
             />
-            <TouchableOpacity
-                style={[styles.button, { backgroundColor: '#28a745' }]}
-                onPress={() => navigation.navigate('Profile')}
-            >
-                <Text style={styles.buttonText}>Ir para Perfil</Text>
-            </TouchableOpacity>
         </View>
     );
 }
