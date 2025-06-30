@@ -12,7 +12,7 @@ export default function ScrollScreen({ navigation }) {
                         <TouchableOpacity
                         key={index}
                         style={styles.item}
-                        onPress={() => navigation.navigate('Details', { mensagem: Item ${index + 1} })}
+                        onPress={() => navigation.navigate('Details', { mensagem: `Item ${index + 1}` })}
                         >
                         <Image
                             source={require('../assets/fundo.png')} 
