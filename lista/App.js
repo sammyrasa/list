@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
@@ -24,6 +25,8 @@ const App = () => {
 <<<<<<< HEAD
 }
 =======
+=======
+>>>>>>> Stashed changes
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 
@@ -115,9 +118,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
 };
 
 export default App;
 >>>>>>> c1009de536070539f30ca242879cc8d6ef4f6622
+=======
+>>>>>>> Stashed changes
