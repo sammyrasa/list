@@ -15,7 +15,7 @@ export default function ScrollScreen({ navigation }) {
                         onPress={() => navigation.navigate('Details', { mensagem: `Item ${index + 1}` })}
                         >
                         <Image
-                            source={require('../assets/fundo.png')} 
+                            source={require('../assets/icon.png')} 
                             style={styles.itemImage}
                         />
                         <Text style={styles.itemText}>Item {index + 1}</Text>

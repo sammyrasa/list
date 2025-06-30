@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
-import ItemCard from '../componentes/ItemCard';
+import ItemCard from '../components/ItemCard';
 
 const DATA = [
     { id: '1', title: 'Item 1', description: 'Descrição do item 1' },
