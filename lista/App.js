@@ -1,21 +1,27 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+import React from 'react';
+>>>>>>> c1009de536070539f30ca242879cc8d6ef4f6622
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import AddTaskScreen from './screens/AddTaskScreen';
+import DetailsScreen from './screens/DetailsScreen';
 import HomeScreen from './screens/HomeScreen';
 
 const Stack = createStackNavigator();
 
-export default function App() {
+const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-        />
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="AddTask" component={AddTaskScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
+<<<<<<< HEAD
 }
 =======
 import React from 'react';
@@ -110,3 +116,8 @@ const styles = StyleSheet.create({
   },
 });
 >>>>>>> Stashed changes
+=======
+};
+
+export default App;
+>>>>>>> c1009de536070539f30ca242879cc8d6ef4f6622
