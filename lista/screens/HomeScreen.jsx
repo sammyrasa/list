@@ -11,6 +11,9 @@ const DATA = [
 ];
 
 export default function HomeScreen({ navigation }) {
+
+    const [data, setData] = useState(DATA);
+
     const renderItem = ({ item }) => (
         <ItemCard
             title={item.title}
@@ -19,9 +22,24 @@ export default function HomeScreen({ navigation }) {
         />
     );
 
+    const adicionarItem = () => {
+        const novoItem = {
+            id: (data.length + 1).toString(),
+            title: `Tarefa ${data.length + 1}`,
+            description: `Descrição da Tarefa ${data.length + 1}`,
+        };
+
+        setData([...data, novoItem]);
+    };
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Lista de Tarefas</Text>
+
+            <TouchableOpacity style={styles.button} onPress={adicionarItem}>
+                <Text style={styles.buttonText}>+ Adicionar Tarefa</Text>
+            </TouchableOpacity>
+
             <FlatList
                 data={DATA}
                 renderItem={renderItem}
@@ -73,11 +91,12 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     button: {
-        backgroundColor: '#007bff',
-        paddingVertical: 10,
+        backgroundColor: '#28a745',
+        paddingVertical: 12,
         paddingHorizontal: 20,
-        borderRadius: 5,
+        borderRadius: 8,
         alignItems: 'center',
+        marginBottom: 20,
     },
     buttonText: {
         color: '#fff',
