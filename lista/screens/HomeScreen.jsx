@@ -37,7 +37,7 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.title}>Lista de Tarefas</Text>
 
             <TouchableOpacity style={styles.button} onPress={adicionarItem}>
-                <Text style={styles.buttonText}>+ Adicionar Tarefa</Text>
+                <Text style={styles.buttonText}>Adicionar Tarefa</Text>
             </TouchableOpacity>
 
             <FlatList
