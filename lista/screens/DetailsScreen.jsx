@@ -5,7 +5,7 @@ export default function DetailsScreen({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Detalhes do Item</Text>
+            <Text style={styles.title}>Detalhes da Tarefa</Text>
 
             {item ? (
                 <>
@@ -13,7 +13,7 @@ export default function DetailsScreen({ navigation, route }) {
                     <Text style={styles.itemDescription}>{item.description}</Text>
                 </>
             ) : (
-                <Text style={styles.message}>Nenhum item selecionado</Text>
+                <Text style={styles.message}>Nenhuma Tarefa selecionada</Text>
             )}
 
             <TouchableOpacity
