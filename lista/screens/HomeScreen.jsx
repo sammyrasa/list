@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     cancelButton: {
-        backgroundColor: '#dc3545',
+        backgroundColor: '#EE95F5',
         padding: 12,
         borderRadius: 8,
         flex: 1,
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
         color: '#999',
     },
     editButtonText: {
-        color: '#fff',
+        color: '#000',
         fontSize: 12,
         fontWeight: 'bold',
     },
