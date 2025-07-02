@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     saveButton: {
-        backgroundColor: '#007bff',
+        backgroundColor: '#CF95F5',
         padding: 12,
         borderRadius: 8,
         flex: 1,
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
         color: '#999',
     },
     editButtonText: {
-        color: '#333',
+        color: '#fff',
         fontSize: 12,
         fontWeight: 'bold',
     },
