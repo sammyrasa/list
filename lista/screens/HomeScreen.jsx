@@ -13,8 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { CheckBox } from 'react-native-elements';
 
 const PASTEL_COLORS = [
-    '#FADADD', '#D0F0C0', '#B0E0E6', '#FFFACD', '#E6E6FA',
-    '#F5DEB3', '#AED9E0', '#FFE4E1', '#F0EAD6', '#E0BBE4',
+    '#FADADD', '#FFFACD', '#E6E6FA', '#FFE4E1', '#F0EAD6', '#E0BBE4',
 ];
 
 function getRandomPastelColor() {
@@ -89,7 +88,7 @@ export default function HomeScreen() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Checklist</Text>
+            <Text style={styles.title}>my checklist</Text>
 
             <TouchableOpacity style={styles.button} onPress={() => setModalVisible(true)}>
                 <Text style={styles.buttonText}>+ Adicionar Tarefa</Text>
@@ -147,7 +146,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#ECCCF0',
         padding: 20,
     },
     title: {
@@ -158,7 +157,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     button: {
-        backgroundColor: '#28a745',
+        backgroundColor: '#CF95F5',
         paddingVertical: 12,
         paddingHorizontal: 20,
         borderRadius: 8,
