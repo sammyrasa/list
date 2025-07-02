@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from "react-native"
 function Card({ texto }) {
     return (
         <View style={styles.card}>
-            <Text style={styles.cardText}>{texto}</Text>
+            <Text style={styles.cardTexto}>{texto}</Text>
         </View>
     )
 }

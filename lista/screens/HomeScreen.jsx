@@ -11,6 +11,24 @@ import {
 } from 'react-native';
 import ItemCard from '../components/ItemCard';
 
+const PASTEL_COLORS = [
+  '#FADADD', // rosa claro
+  '#D0F0C0', // verde claro
+  '#B0E0E6', // azul pastel
+  '#FFFACD', // amarelo claro
+  '#E6E6FA', // lavanda
+  '#F5DEB3', // bege
+  '#AED9E0', // azul bebê
+  '#FFE4E1', // rosado
+  '#F0EAD6', // creme
+  '#E0BBE4', // lilás claro
+];
+
+function getRandomPastelColor() {
+  const index = Math.floor(Math.random() * PASTEL_COLORS.length);
+  return PASTEL_COLORS[index];
+}
+
 const initialData = [
 ];
 
@@ -21,21 +39,25 @@ export default function HomeScreen({ navigation }) {
     const [newDescription, setNewDescription] = useState('');
 
     const renderItem = ({ item }) => (
-        <ItemCard
-            title={item.title}
-            description={item.description}
-            onPress={() => navigation.navigate('Details', { item })}
-        />
+            <ItemCard
+        title={item.title}
+        description={item.description}
+        color={item.color}
+        onPress={() => navigation.navigate('Details', { item })}
+    />
+
     );
 
     const adicionarItem = () => {
         if (!newTitle.trim()) return;
 
         const novoItem = {
-            id: (data.length + 1).toString(),
-            title: newTitle,
-            description: newDescription,
-        };
+        id: (data.length + 1).toString(),
+        title: newTitle,
+        description: newDescription,
+        color: getRandomPastelColor(),
+    };
+
 
         setData([...data, novoItem]);
         setNewTitle('');

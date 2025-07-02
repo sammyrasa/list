@@ -5,8 +5,7 @@ export default function DetailsScreen({ navigation, route }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Detalhes da Tarefa</Text>
-
+            
             {item ? (
                 <>
                     <Text style={styles.itemTitle}>{item.title}</Text>

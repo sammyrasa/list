@@ -1,13 +1,19 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
-export default function ItemCard({ title, description, onPress }) {
+
+
+export default function ItemCard({ title, description, color, onPress }) {
     return (
-        <TouchableOpacity style={styles.card} onPress={onPress}>
+        <TouchableOpacity
+            style={[styles.card, { backgroundColor: color }]}
+            onPress={onPress}
+        >
             <Text style={styles.cardTitle}>{title}</Text>
             <Text style={styles.cardDescription}>{description}</Text>
         </TouchableOpacity>
     );
 }
+
 
 const styles = StyleSheet.create({
     card: {
