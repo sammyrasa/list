@@ -9,25 +9,13 @@ import {
     TextInput,
     Pressable,
 } from 'react-native';
-import ItemCard from '../components/ItemCard';
+import { CheckBox } from 'react-native-elements'; // Instala react-native-elements se ainda não tiver
 
-const initialData = [
-
-];
-
-export default function HomeScreen({ navigation }) {
-    const [data, setData] = useState(initialData);
+export default function HomeScreen() {
+    const [data, setData] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [newTitle, setNewTitle] = useState('');
     const [newDescription, setNewDescription] = useState('');
-
-    const renderItem = ({ item }) => (
-        <ItemCard
-            title={item.title}
-            description={item.description}
-            onPress={() => navigation.navigate('Details', { item })}
-        />
-    );
 
     const adicionarItem = () => {
         if (!newTitle.trim()) return;
@@ -36,6 +24,7 @@ export default function HomeScreen({ navigation }) {
             id: (data.length + 1).toString(),
             title: newTitle,
             description: newDescription,
+            checked: false,
         };
 
         setData([...data, novoItem]);
@@ -44,9 +33,33 @@ export default function HomeScreen({ navigation }) {
         setModalVisible(false);
     };
 
+    const toggleCheck = (id) => {
+        const newData = data.map(item =>
+            item.id === id ? { ...item, checked: !item.checked } : item
+        );
+        setData(newData);
+    };
+
+    const renderItem = ({ item }) => (
+        <View style={styles.itemContainer}>
+            <CheckBox
+                checked={item.checked}
+                onPress={() => toggleCheck(item.id)}
+            />
+            <View style={{ flex: 1 }}>
+                <Text style={[styles.itemTitle, item.checked && styles.checkedText]}>
+                    {item.title}
+                </Text>
+                <Text style={[styles.itemDesc, item.checked && styles.checkedText]}>
+                    {item.description}
+                </Text>
+            </View>
+        </View>
+    );
+
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Lista de Tarefas</Text>
+            <Text style={styles.title}>Checklist</Text>
 
             <TouchableOpacity style={styles.button} onPress={() => setModalVisible(true)}>
                 <Text style={styles.buttonText}>+ Adicionar Tarefa</Text>
@@ -60,7 +73,6 @@ export default function HomeScreen({ navigation }) {
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
             />
 
-            {/* Modal */}
             <Modal
                 visible={modalVisible}
                 transparent={true}
@@ -185,5 +197,21 @@ const styles = StyleSheet.create({
         flex: 1,
         marginLeft: 10,
         alignItems: 'center',
+    },
+    itemContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    itemTitle: {
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    itemDesc: {
+        fontSize: 14,
+        color: '#555',
+    },
+    checkedText: {
+        textDecorationLine: 'line-through',
+        color: '#999',
     },
 });
