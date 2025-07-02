@@ -9,7 +9,7 @@ import {
     TextInput,
     Pressable,
 } from 'react-native';
-import { CheckBox } from 'react-native-elements'; // Instala react-native-elements se ainda não tiver
+import { CheckBox } from 'react-native-elements';
 
 export default function HomeScreen() {
     const [data, setData] = useState([]);
@@ -41,18 +41,20 @@ export default function HomeScreen() {
     };
 
     const renderItem = ({ item }) => (
-        <View style={styles.itemContainer}>
-            <CheckBox
-                checked={item.checked}
-                onPress={() => toggleCheck(item.id)}
-            />
-            <View style={{ flex: 1 }}>
-                <Text style={[styles.itemTitle, item.checked && styles.checkedText]}>
-                    {item.title}
-                </Text>
-                <Text style={[styles.itemDesc, item.checked && styles.checkedText]}>
-                    {item.description}
-                </Text>
+        <View style={styles.card}>
+            <View style={styles.itemContainer}>
+                <CheckBox
+                    checked={item.checked}
+                    onPress={() => toggleCheck(item.id)}
+                />
+                <View style={{ flex: 1 }}>
+                    <Text style={[styles.itemTitle, item.checked && styles.checkedText]}>
+                        {item.title}
+                    </Text>
+                    <Text style={[styles.itemDesc, item.checked && styles.checkedText]}>
+                        {item.description}
+                    </Text>
+                </View>
             </View>
         </View>
     );
@@ -144,9 +146,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     separator: {
-        height: 1,
-        backgroundColor: '#ddd',
-        marginVertical: 5,
+        height: 10,
     },
     modalOverlay: {
         flex: 1,
@@ -197,6 +197,16 @@ const styles = StyleSheet.create({
         flex: 1,
         marginLeft: 10,
         alignItems: 'center',
+    },
+    card: {
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        padding: 15,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        elevation: 3,
     },
     itemContainer: {
         flexDirection: 'row',
