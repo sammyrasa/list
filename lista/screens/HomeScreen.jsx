@@ -39,7 +39,7 @@ export default function HomeScreen() {
 
     const adicionarItem = () => {
         if (!newTitle.trim()) return;
-
+ 
         const novoItem = {
         id: (data.length + 1).toString(),
         title: newTitle,
