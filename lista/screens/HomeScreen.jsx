@@ -26,22 +26,49 @@ export default function HomeScreen() {
     const [modalVisible, setModalVisible] = useState(false);
     const [newTitle, setNewTitle] = useState('');
     const [newDescription, setNewDescription] = useState('');
+    const [editingItemId, setEditingItemId] = useState(null);
     const navigation = useNavigation();
 
-    const adicionarItem = () => {
-        if (!newTitle.trim()) return;
- 
-        const novoItem = {
-            id: (data.length + 1).toString(),
-            title: newTitle,
-            description: newDescription,
-            color: getRandomPastelColor(),
-            checked: false,
-        };
-
-        setData([...data, novoItem]);
+    const abrirModalAdicionar = () => {
         setNewTitle('');
         setNewDescription('');
+        setEditingItemId(null);
+        setModalVisible(true);
+    };
+
+    const abrirModalEditar = (item) => {
+        setNewTitle(item.title);
+        setNewDescription(item.description);
+        setEditingItemId(item.id);
+        setModalVisible(true);
+    };
+
+    const salvarItem = () => {
+        if (!newTitle.trim()) return;
+
+        if (editingItemId) {
+            // Editando item existente
+            const updatedData = data.map((item) =>
+                item.id === editingItemId
+                    ? { ...item, title: newTitle, description: newDescription }
+                    : item
+            );
+            setData(updatedData);
+        } else {
+            // Adicionando novo item
+            const novoItem = {
+                id: (data.length + 1).toString(),
+                title: newTitle,
+                description: newDescription,
+                color: getRandomPastelColor(),
+                checked: false,
+            };
+            setData([...data, novoItem]);
+        }
+
+        setNewTitle('');
+        setNewDescription('');
+        setEditingItemId(null);
         setModalVisible(false);
     };
 
@@ -53,16 +80,13 @@ export default function HomeScreen() {
     };
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity
-            style={[styles.card, { backgroundColor: item.color }]}
-            onPress={() => navigation.navigate('Details', { item })}
-        >
+        <View style={[styles.card, { backgroundColor: item.color }]}>
             <View style={styles.itemContainer}>
                 <CheckBox
                     checked={item.checked}
                     onPress={() => toggleCheck(item.id)}
                 />
-                <View>
+                <View style={{ flex: 1 }}>
                     <Text
                         style={[
                             styles.itemTitle,
@@ -82,15 +106,21 @@ export default function HomeScreen() {
                         </Text>
                     ) : null}
                 </View>
+                <TouchableOpacity
+                    style={styles.editButton}
+                    onPress={() => abrirModalEditar(item)}
+                >
+                    <Text style={styles.editButtonText}>Editar</Text>
+                </TouchableOpacity>
             </View>
-        </TouchableOpacity>
+        </View>
     );
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>my checklist</Text>
 
-            <TouchableOpacity style={styles.button} onPress={() => setModalVisible(true)}>
+            <TouchableOpacity style={styles.button} onPress={abrirModalAdicionar}>
                 <Text style={styles.buttonText}>+ Adicionar Tarefa</Text>
             </TouchableOpacity>
 
@@ -110,7 +140,9 @@ export default function HomeScreen() {
             >
                 <View style={styles.modalOverlay}>
                     <View style={styles.modalContainer}>
-                        <Text style={styles.modalTitle}>Nova Tarefa</Text>
+                        <Text style={styles.modalTitle}>
+                            {editingItemId ? 'Editar Tarefa' : 'Nova Tarefa'}
+                        </Text>
 
                         <TextInput
                             style={styles.input}
@@ -132,7 +164,7 @@ export default function HomeScreen() {
                                 <Text style={styles.buttonText}>Cancelar</Text>
                             </Pressable>
 
-                            <Pressable style={styles.saveButton} onPress={adicionarItem}>
+                            <Pressable style={styles.saveButton} onPress={salvarItem}>
                                 <Text style={styles.buttonText}>Salvar</Text>
                             </Pressable>
                         </View>
@@ -250,6 +282,17 @@ const styles = StyleSheet.create({
         textDecorationLine: 'line-through',
         color: '#999',
     },
+    editButton: {
+        backgroundColor: '#ffc107',
+        paddingVertical: 6,
+        paddingHorizontal: 10,
+        borderRadius: 6,
+        marginLeft: 8,
+    },
+    editButtonText: {
+        color: '#333',
+        fontSize: 12,
+        fontWeight: 'bold',
+    },
 });
-
-//teste
+//teste ana 
