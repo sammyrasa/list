@@ -1,16 +1,24 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { CheckBox } from "react-native-elements";
 
-
-
-export default function ItemCard({ title, description, color, onPress }) {
+export default function ItemCard({ title, description, color, checked, onToggleCheck }) {
     return (
-        <TouchableOpacity
-            style={[styles.card, { backgroundColor: color }]}
-            onPress={onPress}
-        >
-            <Text style={styles.cardTitle}>{title}</Text>
-            <Text style={styles.cardDescription}>{description}</Text>
-        </TouchableOpacity>
+        <View style={[styles.card, { backgroundColor: color }]}>
+            <View style={styles.itemContainer}>
+                <CheckBox
+                    checked={checked}
+                    onPress={onToggleCheck}
+                />
+                <View style={{ flex: 1 }}>
+                    <Text style={[styles.cardTitle, checked && styles.checkedText]}>
+                        {title}
+                    </Text>
+                    <Text style={[styles.cardDescription, checked && styles.checkedText]}>
+                        {description}
+                    </Text>
+                </View>
+            </View>
+        </View>
     );
 }
 
@@ -39,4 +47,13 @@ const styles = StyleSheet.create({
         color: "#666",
         marginTop: 5,
     },
+    itemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    },
+    checkedText: {
+        textDecorationLine: 'line-through',
+        color: '#999',
+    },
+
 });

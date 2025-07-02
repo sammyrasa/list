@@ -9,7 +9,27 @@ import {
     TextInput,
     Pressable,
 } from 'react-native';
+import ItemCard from '../components/ItemCard';
 import { CheckBox } from 'react-native-elements';
+const PASTEL_COLORS = [
+
+  '#FADADD', // rosa claro
+  '#D0F0C0', // verde claro
+  '#B0E0E6', // azul pastel
+  '#FFFACD', // amarelo claro
+  '#E6E6FA', // lavanda
+  '#F5DEB3', // bege
+  '#AED9E0', // azul bebê
+  '#FFE4E1', // rosado
+  '#F0EAD6', // creme
+  '#E0BBE4', // lilás claro
+];
+
+function getRandomPastelColor() {
+  const index = Math.floor(Math.random() * PASTEL_COLORS.length);
+  return PASTEL_COLORS[index];
+}
+
 
 export default function HomeScreen() {
     const [data, setData] = useState([]);
@@ -21,11 +41,12 @@ export default function HomeScreen() {
         if (!newTitle.trim()) return;
 
         const novoItem = {
-            id: (data.length + 1).toString(),
-            title: newTitle,
-            description: newDescription,
-            checked: false,
-        };
+        id: (data.length + 1).toString(),
+        title: newTitle,
+        description: newDescription,
+        color: getRandomPastelColor(),
+    };
+
 
         setData([...data, novoItem]);
         setNewTitle('');
@@ -38,26 +59,17 @@ export default function HomeScreen() {
             item.id === id ? { ...item, checked: !item.checked } : item
         );
         setData(newData);
-    };
-
+        };
     const renderItem = ({ item }) => (
-        <View style={styles.card}>
-            <View style={styles.itemContainer}>
-                <CheckBox
-                    checked={item.checked}
-                    onPress={() => toggleCheck(item.id)}
-                />
-                <View style={{ flex: 1 }}>
-                    <Text style={[styles.itemTitle, item.checked && styles.checkedText]}>
-                        {item.title}
-                    </Text>
-                    <Text style={[styles.itemDesc, item.checked && styles.checkedText]}>
-                        {item.description}
-                    </Text>
-                </View>
-            </View>
-        </View>
+        <ItemCard
+            title={item.title}
+            description={item.description}
+            color={item.color}
+            checked={item.checked}
+            onToggleCheck={() => toggleCheck(item.id)}
+        />
     );
+
 
     return (
         <View style={styles.container}>
