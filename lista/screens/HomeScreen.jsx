@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { CheckBox } from 'react-native-elements';
 
 const PASTEL_COLORS = [
-    '#FADADD', '#FFFACD', '#E6E6FA', '#FFE4E1', '#F0EAD6', '#E0BBE4',
+    '#FADADD', '#E6E6FA', '#FFE4E1', '#F0EAD6', '#E0BBE4',
 ];
 
 function getRandomPastelColor() {
@@ -79,8 +79,17 @@ export default function HomeScreen() {
         setData(newData);
     };
 
+    const removerItem = (id) => {
+        const newData = data.filter(item => item.id !== id);
+        setData(newData);
+    };
+
     const renderItem = ({ item }) => (
-        <View style={[styles.card, { backgroundColor: item.color }]}>
+        <TouchableOpacity
+            style={[styles.card, { backgroundColor: item.color }]}
+            activeOpacity={0.9}
+            onPress={() => navigation.navigate('Details', { item })}
+        >
             <View style={styles.itemContainer}>
                 <CheckBox
                     checked={item.checked}
@@ -112,8 +121,14 @@ export default function HomeScreen() {
                 >
                     <Text style={styles.editButtonText}>Editar</Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.removeButton}
+                    onPress={() => removerItem(item.id)}
+                >
+                    <Text style={styles.removeButtonText}>✕</Text>
+                </TouchableOpacity>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 
     return (
@@ -282,17 +297,24 @@ const styles = StyleSheet.create({
         textDecorationLine: 'line-through',
         color: '#999',
     },
-    editButton: {
-        backgroundColor: '#ffc107',
-        paddingVertical: 6,
-        paddingHorizontal: 10,
-        borderRadius: 6,
-        marginLeft: 8,
-    },
     editButtonText: {
         color: '#333',
         fontSize: 12,
         fontWeight: 'bold',
     },
+    removeButton: {
+        marginLeft: 10,
+        backgroundColor: '#CF95F5',
+        borderRadius: 20,
+        width: 28,
+        height: 28,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    removeButtonText: {
+        color: '#fff',
+        fontSize: 18,
+        lineHeight: 18,
+        fontWeight: 'bold',
+    },
 });
-//teste ana 
