@@ -12,11 +12,6 @@ import {
 import ItemCard from '../components/ItemCard';
 
 const initialData = [
-    { id: '1', title: 'Tarefa 1', description: 'Descrição da Tarefa 1' },
-    { id: '2', title: 'Tarefa 2', description: 'Descrição da Tarefa 2' },
-    { id: '3', title: 'Tarefa 3', description: 'Descrição da Tarefa 3' },
-    { id: '4', title: 'Tarefa 4', description: 'Descrição da Tarefa 4' },
-    { id: '5', title: 'Tarefa 5', description: 'Descrição da Tarefa 5' },
 ];
 
 export default function HomeScreen({ navigation }) {
