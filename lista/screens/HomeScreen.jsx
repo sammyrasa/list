@@ -9,44 +9,36 @@ import {
     TextInput,
     Pressable,
 } from 'react-native';
-import ItemCard from '../components/ItemCard';
+import { useNavigation } from '@react-navigation/native';
 import { CheckBox } from 'react-native-elements';
-const PASTEL_COLORS = [
 
-  '#FADADD', // rosa claro
-  '#D0F0C0', // verde claro
-  '#B0E0E6', // azul pastel
-  '#FFFACD', // amarelo claro
-  '#E6E6FA', // lavanda
-  '#F5DEB3', // bege
-  '#AED9E0', // azul bebê
-  '#FFE4E1', // rosado
-  '#F0EAD6', // creme
-  '#E0BBE4', // lilás claro
+const PASTEL_COLORS = [
+    '#FADADD', '#D0F0C0', '#B0E0E6', '#FFFACD', '#E6E6FA',
+    '#F5DEB3', '#AED9E0', '#FFE4E1', '#F0EAD6', '#E0BBE4',
 ];
 
 function getRandomPastelColor() {
-  const index = Math.floor(Math.random() * PASTEL_COLORS.length);
-  return PASTEL_COLORS[index];
+    const index = Math.floor(Math.random() * PASTEL_COLORS.length);
+    return PASTEL_COLORS[index];
 }
-
 
 export default function HomeScreen() {
     const [data, setData] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [newTitle, setNewTitle] = useState('');
     const [newDescription, setNewDescription] = useState('');
+    const navigation = useNavigation();
 
     const adicionarItem = () => {
         if (!newTitle.trim()) return;
  
         const novoItem = {
-        id: (data.length + 1).toString(),
-        title: newTitle,
-        description: newDescription,
-        color: getRandomPastelColor(),
-    };
-
+            id: (data.length + 1).toString(),
+            title: newTitle,
+            description: newDescription,
+            color: getRandomPastelColor(),
+            checked: false,
+        };
 
         setData([...data, novoItem]);
         setNewTitle('');
@@ -59,17 +51,41 @@ export default function HomeScreen() {
             item.id === id ? { ...item, checked: !item.checked } : item
         );
         setData(newData);
-        };
-    const renderItem = ({ item }) => (
-        <ItemCard
-            title={item.title}
-            description={item.description}
-            color={item.color}
-            checked={item.checked}
-            onToggleCheck={() => toggleCheck(item.id)}
-        />
-    );
+    };
 
+    const renderItem = ({ item }) => (
+        <TouchableOpacity
+            style={[styles.card, { backgroundColor: item.color }]}
+            onPress={() => navigation.navigate('Details', { item })}
+        >
+            <View style={styles.itemContainer}>
+                <CheckBox
+                    checked={item.checked}
+                    onPress={() => toggleCheck(item.id)}
+                />
+                <View>
+                    <Text
+                        style={[
+                            styles.itemTitle,
+                            item.checked && styles.checkedText,
+                        ]}
+                    >
+                        {item.title}
+                    </Text>
+                    {item.description ? (
+                        <Text
+                            style={[
+                                styles.itemDesc,
+                                item.checked && styles.checkedText,
+                            ]}
+                        >
+                            {item.description}
+                        </Text>
+                    ) : null}
+                </View>
+            </View>
+        </TouchableOpacity>
+    );
 
     return (
         <View style={styles.container}>
@@ -211,7 +227,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     card: {
-        backgroundColor: '#fff',
         borderRadius: 10,
         padding: 15,
         shadowColor: '#000',
@@ -237,3 +252,5 @@ const styles = StyleSheet.create({
         color: '#999',
     },
 });
+
+//teste
