@@ -28,7 +28,7 @@ export default function DetailsScreen({ navigation, route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#D9C9F0',
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20,
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     button: {
-        backgroundColor: '#dc3545',
+        backgroundColor: '#AF90F5',
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,

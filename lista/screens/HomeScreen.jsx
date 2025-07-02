@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { CheckBox } from 'react-native-elements';
 
 const PASTEL_COLORS = [
-    '#FADADD', '#FFFACD', '#E6E6FA', '#FFE4E1', '#F0EAD6', '#E0BBE4',
+    '#FADADD', '#FFFACD', '#E6E6FA', '#FFE4E1', '#F0EAD6', '#E0BBE4','#B1DAEE',
 ];
 
 function getRandomPastelColor() {

@@ -24,7 +24,7 @@ export default function App() {
           component={DetailsScreen}
           options={{
             title: 'Detalhes',
-            headerStyle: { backgroundColor: '#dc3545' },
+            headerStyle: { backgroundColor: '#673CA3' },
             headerTintColor: '#fff',
           }}
         />
